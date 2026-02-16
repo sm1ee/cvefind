@@ -7,9 +7,6 @@ import typer
 
 from cve_finder.service import find_cves
 
-app = typer.Typer(help="Find CVE IDs for a package name from multiple sources.")
-
-
 SUMMARY_MAX_LEN = 250
 
 SEVERITY_COLOR = {
@@ -160,7 +157,6 @@ def _render_human(result: dict) -> str:
     return "\n".join(lines)
 
 
-@app.callback(invoke_without_command=True)
 def main(
     package_name: str = typer.Argument(..., help="Package name. Example: n8n"),
     ecosystem: str = typer.Option("npm", "--ecosystem", "-e", help="Package ecosystem"),
@@ -217,5 +213,9 @@ def main(
     raise typer.BadParameter("Unsupported output format. Use: default, json, yaml.")
 
 
+def run() -> None:
+    typer.run(main)
+
+
 if __name__ == "__main__":
-    app()
+    run()

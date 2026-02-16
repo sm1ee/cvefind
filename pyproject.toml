@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cvefind = "cve_finder.cli:app"
+cvefind = "cve_finder.cli:run"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
