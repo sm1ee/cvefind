@@ -28,6 +28,35 @@ source .venv/bin/activate
 pip install .
 ```
 
+## Help
+
+```bash
+cvefind --help
+                                                                           
+ Usage: cvefind [OPTIONS] PACKAGE_NAME                                     
+                                                                           
+╭─ Arguments ─────────────────────────────────────────────────────────────╮
+│ *    package_name      TEXT  Package name. Example: n8n [required]      │
+╰─────────────────────────────────────────────────────────────────────────╯
+╭─ Options ───────────────────────────────────────────────────────────────╮
+│ --ecosystem             -e      TEXT   Package ecosystem [default: npm] │
+│ --alias                 -a      TEXT   Additional search alias.         │
+│                                        Repeatable.                      │
+│ --include-ghsa-pending                 Include GHSA advisories that do  │
+│                                        not have a CVE yet.              │
+│ --min-severity                  TEXT   Filter by minimum severity: low, │
+│                                        medium, moderate, high,          │
+│                                        critical.                        │
+│ --output                -o      TEXT   Output format: default, json,    │
+│                                        yaml.                            │
+│                                        [default: default]               │
+│ --timeout                       FLOAT  HTTP timeout (seconds)           │
+│                                        [default: 20.0]                  │
+│ --help                                 Show this message and exit.      │
+╰─────────────────────────────────────────────────────────────────────────╯
+
+```
+
 ## Quick Start
 
 ```bash
