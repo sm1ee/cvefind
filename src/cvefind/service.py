@@ -3,9 +3,9 @@ from __future__ import annotations
 import asyncio
 from typing import Any
 
-from cve_finder.aliases import get_aliases
-from cve_finder.collectors import collect_from_ghsa, collect_from_nvd, collect_from_osv
-from cve_finder.models import CveRecord, PendingGhsaRecord
+from cvefind.aliases import get_aliases
+from cvefind.collectors import collect_from_ghsa, collect_from_nvd, collect_from_osv
+from cvefind.models import CveRecord, PendingGhsaRecord
 
 OSV_ECOSYSTEM_MAP = {
     "npm": "npm",

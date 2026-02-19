@@ -1,7 +1,7 @@
 import unittest
 
-from cve_finder.models import CveRecord, PendingGhsaRecord
-from cve_finder.service import (
+from cvefind.models import CveRecord, PendingGhsaRecord
+from cvefind.service import (
     _filter_by_severity,
     _filter_pending_by_severity,
     _merge,

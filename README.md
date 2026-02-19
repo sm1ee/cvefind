@@ -22,7 +22,8 @@ It is optimized for:
 ## Installation
 
 ```bash
-cd /Users/smlee/Desktop/git/cvefind
+git clone https://github.com/sm1ee/cvefind.git
+cd cvefind
 python3 -m venv .venv
 source .venv/bin/activate
 pip install .
@@ -161,5 +162,5 @@ PYTHONPATH=src python3 -m unittest discover -s tests -q
 Basic syntax check:
 
 ```bash
-PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m py_compile src/cve_finder/*.py tests/test_service.py
+PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m py_compile src/cvefind/*.py tests/test_service.py
 ```

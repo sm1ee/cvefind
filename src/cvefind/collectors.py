@@ -4,7 +4,7 @@ import os
 import re
 from typing import Any
 
-from cve_finder.models import CveRecord, PendingGhsaRecord
+from cvefind.models import CveRecord, PendingGhsaRecord
 
 CVE_RE = re.compile(r"^CVE-\d{4}-\d{4,}$", re.IGNORECASE)
 

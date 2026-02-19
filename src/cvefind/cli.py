@@ -5,7 +5,7 @@ import json
 
 import typer
 
-from cve_finder.service import find_cves
+from cvefind.service import find_cves
 
 SUMMARY_MAX_LEN = 250
 
