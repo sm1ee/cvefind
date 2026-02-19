@@ -1,16 +1,17 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Optional
 
 
 @dataclass
 class CveRecord:
     cve_id: str
-    summary: str | None = None
-    severity: str | None = None
-    cvss_score: float | None = None
-    cvss_vector: str | None = None
-    published_at: str | None = None
+    summary: Optional[str] = None
+    severity: Optional[str] = None
+    cvss_score: Optional[float] = None
+    cvss_vector: Optional[str] = None
+    published_at: Optional[str] = None
     sources: set[str] = field(default_factory=set)
     references: set[str] = field(default_factory=set)
 
@@ -18,7 +19,7 @@ class CveRecord:
 @dataclass
 class PendingGhsaRecord:
     ghsa_id: str
-    summary: str | None = None
-    severity: str | None = None
-    published_at: str | None = None
+    summary: Optional[str] = None
+    severity: Optional[str] = None
+    published_at: Optional[str] = None
     references: set[str] = field(default_factory=set)

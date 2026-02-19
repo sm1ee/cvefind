@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import os
 import re
-from typing import Any
+from typing import Any, Optional
 
 from cvefind.models import CveRecord, PendingGhsaRecord
 
 CVE_RE = re.compile(r"^CVE-\d{4}-\d{4,}$", re.IGNORECASE)
 
 
-def _clean_cve(value: str | None) -> str | None:
+def _clean_cve(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
     candidate = value.strip().upper()
@@ -18,7 +18,7 @@ def _clean_cve(value: str | None) -> str | None:
     return None
 
 
-def _first_description(items: list[dict[str, Any]] | None) -> str | None:
+def _first_description(items: Optional[list[dict[str, Any]]]) -> Optional[str]:
     if not items:
         return None
     for item in items:
@@ -28,7 +28,7 @@ def _first_description(items: list[dict[str, Any]] | None) -> str | None:
     return None
 
 
-def _extract_nvd_severity(metrics: dict[str, Any] | None) -> str | None:
+def _extract_nvd_severity(metrics: Optional[dict[str, Any]]) -> Optional[str]:
     if not metrics:
         return None
     for key in ("cvssMetricV31", "cvssMetricV30", "cvssMetricV2"):
@@ -44,7 +44,7 @@ def _extract_nvd_severity(metrics: dict[str, Any] | None) -> str | None:
     return None
 
 
-def _extract_nvd_cvss_score(metrics: dict[str, Any] | None) -> float | None:
+def _extract_nvd_cvss_score(metrics: Optional[dict[str, Any]]) -> Optional[float]:
     if not metrics:
         return None
     for key in ("cvssMetricV31", "cvssMetricV30", "cvssMetricV2"):
@@ -64,7 +64,7 @@ def _extract_nvd_cvss_score(metrics: dict[str, Any] | None) -> float | None:
     return None
 
 
-def _extract_nvd_cvss_vector(metrics: dict[str, Any] | None) -> str | None:
+def _extract_nvd_cvss_vector(metrics: Optional[dict[str, Any]]) -> Optional[str]:
     if not metrics:
         return None
     for key in ("cvssMetricV31", "cvssMetricV30", "cvssMetricV2"):

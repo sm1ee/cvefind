@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from typing import Optional
 
 import typer
 
@@ -19,7 +20,7 @@ SEVERITY_COLOR = {
 }
 
 
-def _truncate_summary(value: str | None, max_len: int = SUMMARY_MAX_LEN) -> str | None:
+def _truncate_summary(value: Optional[str], max_len: int = SUMMARY_MAX_LEN) -> Optional[str]:
     if not value:
         return None
     clean = " ".join(value.split())
@@ -28,14 +29,14 @@ def _truncate_summary(value: str | None, max_len: int = SUMMARY_MAX_LEN) -> str 
     return clean[: max_len - 3].rstrip() + "..."
 
 
-def _normalize_display_severity(value: str | None) -> str:
+def _normalize_display_severity(value: Optional[str]) -> str:
     raw = (value or "unknown").strip().lower()
     if raw == "moderate":
         raw = "medium"
     return raw
 
 
-def _severity_badge(value: str | None) -> str:
+def _severity_badge(value: Optional[str]) -> str:
     severity = _normalize_display_severity(value)
     label = severity.capitalize()
     if severity == "critical":
@@ -47,7 +48,7 @@ def _severity_badge(value: str | None) -> str:
     return f"[{colored}]"
 
 
-def _pick_ghsa_link(references: list[str] | None) -> str | None:
+def _pick_ghsa_link(references: Optional[list[str]]) -> Optional[str]:
     if not references:
         return None
     for url in references:
@@ -56,13 +57,13 @@ def _pick_ghsa_link(references: list[str] | None) -> str | None:
     return None
 
 
-def _build_nvd_link(cve_id: str | None) -> str | None:
+def _build_nvd_link(cve_id: Optional[str]) -> Optional[str]:
     if not cve_id:
         return None
     return f"https://nvd.nist.gov/vuln/detail/{cve_id}"
 
 
-def _cvss_version_label(cvss_vector: str | None) -> str | None:
+def _cvss_version_label(cvss_vector: Optional[str]) -> Optional[str]:
     if not cvss_vector:
         return None
     vector = cvss_vector.strip().upper()
@@ -171,7 +172,7 @@ def main(
         "--include-ghsa-pending",
         help="Include GHSA advisories that do not have a CVE yet.",
     ),
-    min_severity: str | None = typer.Option(
+    min_severity: Optional[str] = typer.Option(
         None,
         "--min-severity",
         help="Filter by minimum severity: low, medium, moderate, high, critical.",

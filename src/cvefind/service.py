@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any
+from typing import Any, Optional
 
 from cvefind.aliases import get_aliases
 from cvefind.collectors import collect_from_ghsa, collect_from_nvd, collect_from_osv
@@ -37,13 +37,13 @@ SEVERITY_RANK = {
 }
 
 
-def _severity_rank(value: str | None) -> int:
+def _severity_rank(value: Optional[str]) -> int:
     if not value:
         return -1
     return SEVERITY_RANK.get(value.strip().lower(), -1)
 
 
-def _normalize_severity_filter(value: str | None) -> str | None:
+def _normalize_severity_filter(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
     normalized = value.strip().lower()
@@ -53,7 +53,7 @@ def _normalize_severity_filter(value: str | None) -> str | None:
     return normalized
 
 
-def _is_more_recent(left: str | None, right: str | None) -> bool:
+def _is_more_recent(left: Optional[str], right: Optional[str]) -> bool:
     if left and not right:
         return True
     if not left:
@@ -102,7 +102,7 @@ def _merge(records: list[CveRecord]) -> list[CveRecord]:
 
 def _filter_by_severity(
     records: list[CveRecord],
-    min_severity: str | None,
+    min_severity: Optional[str],
 ) -> list[CveRecord]:
     if not min_severity:
         return records
@@ -112,7 +112,7 @@ def _filter_by_severity(
 
 def _filter_pending_by_severity(
     records: list[PendingGhsaRecord],
-    min_severity: str | None,
+    min_severity: Optional[str],
 ) -> list[PendingGhsaRecord]:
     if not min_severity:
         return records
@@ -131,9 +131,9 @@ def _sort_pending(records: list[PendingGhsaRecord]) -> list[PendingGhsaRecord]:
 async def find_cves(
     package_name: str,
     ecosystem: str = "npm",
-    extra_aliases: list[str] | None = None,
+    extra_aliases: Optional[list[str]] = None,
     include_ghsa_pending: bool = False,
-    min_severity: str | None = None,
+    min_severity: Optional[str] = None,
     timeout_sec: float = 20.0,
 ) -> dict[str, Any]:
     ecosystem_key = normalize_ecosystem(ecosystem)
