@@ -21,12 +21,26 @@ It is optimized for:
 
 ## Installation
 
+### Local (project virtualenv)
+
 ```bash
 git clone https://github.com/sm1ee/cvefind.git
 cd cvefind
 python3 -m venv .venv
 source .venv/bin/activate
 pip install .
+```
+
+### Global command on macOS (zsh)
+
+Use this if you want to run `cvefind` from any directory.
+
+```bash
+cd /path/to/cvefind
+python3 -m pip install --user -e .
+echo 'export PATH="$(python3 -m site --user-base)/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+cvefind --help
 ```
 
 ## Help
