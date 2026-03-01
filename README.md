@@ -1,3 +1,4 @@
+cat README.md 
 # cvefind
 
 `cvefind` is a CLI tool that collects CVE data for a package name from multiple advisory sources and merges the results into one view.
@@ -37,10 +38,17 @@ Use this if you want to run `cvefind` from any directory.
 
 ```bash
 cd /path/to/cvefind
-python3 -m pip install --user -e .
+python3 -m pip install --user .
 echo 'export PATH="$(python3 -m site --user-base)/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 cvefind --help
+```
+
+If you specifically want editable install (`-e .`), upgrade packaging tools first:
+
+```bash
+python3 -m pip install --user --upgrade pip setuptools wheel
+python3 -m pip install --user -e .
 ```
 
 ## Help
