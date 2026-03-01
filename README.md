@@ -1,4 +1,3 @@
-cat README.md 
 # cvefind
 
 `cvefind` is a CLI tool that collects CVE data for a package name from multiple advisory sources and merges the results into one view.
